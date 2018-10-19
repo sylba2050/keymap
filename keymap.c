@@ -33,7 +33,7 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LQWER 3
+#define _LOWER 3
 #define _RAISE 4
 #define _ADJUST 16
 
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     CTL_T(KC_TAB), KC_A, KC_S, KC_D, KC_F, KC_G,        KC_H, KC_J, KC_K,    KC_L,   KC_SCLN, KC_QUOT,
           KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,        KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
           GUI_T(KC_LANG2), MO(_LOWER), KC_SPACE,        KC_ENT, MO(_RAISE), ALT_T(KC_LANG1)
-  )
+  ),
 
   /* LOWER
      * ,-----------------------------------------.                ,------------------------------------------.
@@ -128,19 +128,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                     `-------------------------'     `------------------------'
      */
   [_RAISE] = LAYOUT(
-        KC_ESC, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_TILD,       KC_LPRN, KC_RPRN, KC_MINS, KC_EQL, KC_TRNS, KC_BSLS, KC_GRV,
-        KC_TRNS, KC_TRNS KC_LEFT, KC_DOWN, KC_RIGHT, KC_EXLM,    KC_LBRC, KC_RBRC, KC_MS_D, KC_MS_R, KC_TRNS, KC_TRNS,
+        KC_ESC, KC_TRNS, KC_TRNS, KC_UP, KC_TRNS, KC_TILD,       KC_LPRN, KC_RPRN, KC_MINS, KC_EQL, KC_BSLS, KC_GRV,
+        KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_EXLM,    KC_LBRC, KC_RBRC, KC_MS_D, KC_MS_R, KC_TRNS, KC_TRNS,
         KC_LSFT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_AT,       KC_LCBR, KC_RCBR, KC_TRNS, KC_TRNS, KC_TRNS, KC_RSFT,
               GUI_T(KC_LANG2), MO(_LOWER), KC_SPACE,         KC_ENT, MO(_RAISE), ALT_T(KC_LANG1)
    ),
 
-  /* RAISE
+  /* ADJUST
      * ,-----------------------------------------.                ,------------------------------------------.
-     * |  ESC |      |      |  ↑   |      |  ~   |                |   (  |   )  | - _  |  = + |  \ | |  ` ~  |
+     * |  ESC |      |      |      |      |      |                |      |      |      |      |      |       |
      * |------+------+------+------+------+------|                |------+------+------+------+------+-------|
-     * |      |      |   ←  |   ↓  |   →  |  !   |                |   [  |   ]  |   8  |   9  |   0  |       |
+     * |      |      |      |      |      |      |                |      |      |      |      |      |       |
      * |------+------+------+------+------+------|                |------+------+------+------+------+-------|
-     * |LShift|      |      |      |      |  @   |                |   {  |   }  |      |      |      |RShift |
+     * |LShift|      |      |      |      |      |                |      |      |      |      |      |RShift |
      * `---------------------------------------------.     ,-------------------------------------------------'
      *                     | GUIEI  | LOWER | SPACE  |     | ENTER | RAISE  | ALTKN |
      *                     `-------------------------'     `------------------------'
@@ -230,20 +230,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
-        update_tri_layer_RGB(_SYMB, _NAV, _ADJUST);
+        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_LOWER);
-        update_tri_layer_RGB(_SYMB, _NAV, _ADJUST);
+        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
       return false;
       break;
     case RAISE:
       if (record->event.pressed) {
         layer_on(_RAISE);
-        update_tri_layer_RGB(_SYMB, _NAV, _ADJUST);
+        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_RAISE);
-        update_tri_layer_RGB(_SYMB, _NAV, _ADJUST);
+        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
       return false;
       break;
@@ -279,4 +279,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 #endif
+
+
 
