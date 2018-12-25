@@ -54,6 +54,8 @@ enum macro_keycodes {
 #define KC_LVAD  RGB_VAD
 #define KC_LSMOD RGB_SMOD
 #define KC_CTLTB CTL_T(KC_TAB)
+#define KC_SWTB LCTL(KC_PGUP)
+#define KC_SWTBG LCTL(KC_PGDOWN)
 #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
 
@@ -137,22 +139,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* ADJUST
    * ,-----------------------------------------.                ,------------------------------------------.
-   * |  ESC |      |      |      |      |      |                |      |      |      |      |      |       |
+   * |  ESC |      | BTN1 |   ↑  | BTN2 |      |                |      |      | PGUP |      |      |       |
    * |------+------+------+------+------+------|                |------+------+------+------+------+-------|
-   * |      |      |      |      |      |      |                |      |      |      |      |      |       |
+   * |      |      |  ←   |   ↓  |   →  |      |                |      |      |PGDOWN|      |      |       |
    * |------+------+------+------+------+------|                |------+------+------+------+------+-------|
-   * |LShift|      |      |      |      |      |                |      |      |      |      |      |RShift |
+   * |LShift|      | BTAB |      | BTAB |      |                |      |      |      |      |      |RShift |
    * `---------------------------------------------.     ,-------------------------------------------------'
    *                     | GUIEI  | LOWER | SPACE  |     | ENTER | RAISE  | ALTKN |
    *                     `-------------------------'     `------------------------'
    */
   [_ADJUST] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        ESC, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
+        ESC, XXXXX, BTN1,  MS_U,  BTN2,  XXXXX,                  XXXXX, XXXXX,  PGUP, XXXXX, XXXXX, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
+      XXXXX, XXXXX, MS_L,  MS_D,  MS_R,  XXXXX,                  XXXXX, XXXXX,PGDOWN, XXXXX, XXXXX, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,  RSFT,\
+       LSFT, XXXXX, SWTB, XXXXX, SWTBG,  XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                   GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
                               //`--------------------'  `--------------------'
